@@ -24,19 +24,32 @@ def rand_board(square_len, min_num, max_num):
 
 # check_board function
 def check_board(board):
+    # Iterate through each block in board (left -> right, top -> down)
     for y in range(len(board)):
-        for x in range(len(board) - 1):
+        for x in range(len(board)):
             # Check horizontal row
             if board[y][x] in board[y][x+1:]:
                 return False
 
-            # Check vertical row
+            # Check vertical row using temp list
             temp = []
             for i in range(len(board) - y - 1):
                 temp.append(board[i + y + 1][x])
 
             if board[y][x] in temp:
                 return False
+
+            # Check block of nine using temp list
+            temp = []
+            for i in range(3 - (y % 3)):
+                for j in range(3 - (x % 3)):
+                    temp.append(board[y+i][x+j])
+
+            if board[x][y] in temp:
+                return False
+
+            print(len(temp))
+        print("=====")
 
     # If no return, board is valid
     return True
