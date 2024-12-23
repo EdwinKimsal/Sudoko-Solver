@@ -26,8 +26,20 @@ def rand_board(square_len, min_num, max_num):
 def check_board(board):
     for y in range(len(board)):
         for x in range(len(board) - 1):
+            # Check horizontal row
             if board[y][x] in board[y][x+1:]:
                 return False
+
+            # Check vertical row
+            temp = []
+            for i in range(len(board) - y - 1):
+                temp.append(board[i + y + 1][x])
+
+            if board[y][x] in temp:
+                return False
+
+    # If no return, board is valid
+    return True
 
 
 # Print the board function
