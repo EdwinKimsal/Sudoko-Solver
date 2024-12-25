@@ -43,13 +43,11 @@ def check_board(board):
             temp = []
             for i in range(3 - (y % 3)):
                 for j in range(3 - (x % 3)):
-                    temp.append(board[y+i][x+j])
+                    if i != 0 or j != 0:
+                        temp.append(board[y+i][x+j])
 
-            if board[x][y] in temp:
+            if board[y][x] in temp:
                 return False
-
-            print(len(temp))
-        print("=====")
 
     # If no return, board is valid
     return True
