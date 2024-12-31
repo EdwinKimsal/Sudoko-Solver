@@ -27,7 +27,7 @@ def check_board(board):
                 for j in range(3 - (x % 3)):
                     if len(board[y+i]) > x + j:
                         if i != 0 or j != 0:
-                            temp.append(board[y+i][x+j])
+                            temp.append(board[y+i][x+j])S
 
             if len(board[y]) > x:
                 if board[y][x] in temp:
@@ -37,26 +37,54 @@ def check_board(board):
     return True
 
 
-# Random list function
+# Check rand board function
+def block_gen():
+    """
+    Generates three individual blocks,
+    one block is one nested list and
+    returns a list of lists
+    """
+
+    # Set list to a blank list of lists
+    list = [[], [], []]
+
+    # Iterate through each block and ele in each block
+    for i in range(3): # 3 blocks
+        for j in range(9): # 9 ele
+            # Set is_valid to False
+            is_valid = False
+
+            # Iterate until is_valid is True
+            while is_valid != True:
+                num = random.randrange(1, 10)
+
+                if num not in list[i]:
+                    list[i].append(num)
+                    is_valid = True
+
+    # Return final list
+    return list
+
+
+# Random list (board) function
 def rand_board():
-    # Set a blank temp and list
-    list = [[],[],[],[],[],[],[],[],[]]
+    """
+    Generates and returns a new random
+    sudoku board
+    """
 
-    # Iterate for square_len times
-    for y in range(9):
-        for x in range(9):
-            isValid = False
+    # Generate blocks
+    blocks = block_gen()
+    print(blocks)
 
-            while isValid == False:
-                num = str(random.randrange(1, 10))
-                list[y].append(num)
-                print(list)
+    # Set list to a blank board
+    list = [["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)]]
 
-                isValid = check_board(list)
-                print(isValid)
+    # Add three separate blocks to list
+    for i in range(3):
+        for j in range(9):
+            list[i*3 + j//3][i*3 + j%3] = blocks[i][j]
 
-                if isValid == False:
-                    list[y].pop(-1)
 
     # Return the final list
     return list
