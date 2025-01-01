@@ -27,12 +27,32 @@ def check_board(board):
                 for j in range(3 - (x % 3)):
                     if len(board[y+i]) > x + j:
                         if i != 0 or j != 0:
-                            temp.append(board[y+i][x+j])S
+                            temp.append(board[y+i][x+j])
 
             if len(board[y]) > x:
                 if board[y][x] in temp:
                     return False
 
+    #This is what I was going for where the program finds all the spots where the numbers intersect but for the time being it's incomplete 
+    """
+    for i in range(3):
+        for i2 in range(3):
+            num = board[i][i2]
+            for i3 in range(3):
+                for i4 in range(3):
+                    num2 = board[i3+3][i4+3]
+                    if num == num2:
+                        print(num, num2)
+                        print(i, i2, i3, i4)
+                        if board[i][i4+3] == "-":
+                            board[i][i4+3] = num
+                        
+                        
+    board = [[str(int) for int in row] for row in board]
+    return board
+    """
+
+    
     # If no return, board is valid
     return True
 
@@ -78,7 +98,7 @@ def rand_board():
     print(blocks)
 
     # Set list to a blank board
-    list = [["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)], ["-" for i in range(9)]]
+    list = [["-" for i in range(9)] for j in range(9)]
 
     # Add three separate blocks to list
     for i in range(3):
