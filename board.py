@@ -49,8 +49,8 @@ def solve_board(board):
     """
 
     # Iterate through each block in the board
-    for i in range(3):
-        for j in range(6):
+    for i in range(9):
+        for j in range(9):
 
             # If it is blank, try to fill it in
             if board[i][j] == "-":
