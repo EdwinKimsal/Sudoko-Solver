@@ -58,15 +58,13 @@ def solve_board(board):
                 is_valid = False
                 counter = 1
 
-                print(counter)
                 # Iterate while board in not legal
                 while is_valid is False:
                     # Set the board space to the counter
-                    board[i][j] = str(counter)
+                    board[i][j] = counter
 
                     # Check if it is legal
                     is_valid = check_board(board)
-                    print(is_valid)
 
                     # If is not legal, up counter
                     if is_valid is False:
@@ -122,8 +120,6 @@ def rand_board():
     for i in range(3):
         for j in range(9):
             list[i * 3 + j // 3][i * 3 + j % 3] = blocks[i][j]
-
-    print(check_board(list))
 
     # Solve the rest of the board bu calling solve_board function
     list = solve_board(list)
