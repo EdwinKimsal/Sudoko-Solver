@@ -26,16 +26,14 @@ def check_board(board):
 
             # Check block of nine using temp list
             temp = []
-            for i in range(3 - (y % 3)):
-                for j in range(3 - (x % 3)):
-                    if len(board[y + i]) > x + j:
-                        if i != 0 or j != 0:
-                                temp.append(board[y + i][x + j])
+            for i in range(3):
+                for j in  range(3):
+                    if 3*(y//3) + i != y and 3*(x//3) + j != x:
+                        if board[3*(y//3) + i][3*(x//3) + j] != "-":
+                            temp.append(board[3*(y//3) + i][3*(x//3) + j])
 
-            if len(board[y]) > x:
-                if board[y][x] in temp:
-                    if board[y][x] != "-":
-                        return False
+            if board[y][x] in temp:
+                    return False
 
     # If no return, board is valid
     return True
@@ -47,6 +45,9 @@ def solve_board(board):
     Solves the parameter board using brute force
     and returns the solved board
     """
+
+    # Set a copy of the board
+    copy = board[:]
 
     # Iterate through each block in the board
     for i in range(9):
