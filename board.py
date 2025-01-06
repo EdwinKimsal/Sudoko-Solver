@@ -39,6 +39,26 @@ def check_board(board):
     return True
 
 
+# Merge solution and board function
+def merge(board, solution):
+    """
+    Merges two parameters, board and solution,
+    and returns the merged result
+    """
+
+    m_board = board.copy()
+    count = 0
+
+    for i in range(9):
+        for j in range(9):
+            if m_board[i][j] == "-":
+                if count < len(solution):
+                    m_board[i][j] = solution[count]
+                    count += 1
+
+    return m_board
+
+
 # Solve board function
 def solve_board(board):
     """
@@ -46,30 +66,37 @@ def solve_board(board):
     and returns the solved board
     """
 
-    # Set a copy of the board
-    copy = board[:]
+    solution = [1]
+    is_complete = False
 
-    # Iterate through each block in the board
-    for i in range(9):
-        for j in range(9):
+    while is_complete is False:
+        print(board)
+        merged_board = merge(board, solution)
+        print(board)
 
-            # If it is blank, try to fill it in
-            if board[i][j] == "-":
-                # Set is_valid to False by default and counter to 1
-                is_valid = False
-                counter = 1
+        #
+        if merged_board == board:
+            print(True)
+        else:
+            print(False)
+        print("----")
+        #
 
-                # Iterate while board in not legal
-                while is_valid is False:
-                    # Set the board space to the counter
-                    board[i][j] = counter
+        is_valid = check_board(merged_board)
 
-                    # Check if it is legal
-                    is_valid = check_board(board)
+        if is_valid is True:
+            if len(solution) == 54:
+                is_complete = True
 
-                    # If is not legal, up counter
-                    if is_valid is False:
-                        counter += 1
+            else:
+                solution.append(1)
+
+        else:
+            if solution[-1] >= 9:
+                solution.pop()
+
+            else:
+                solution[-1] += 1
 
     # Return the solved board
     return board
