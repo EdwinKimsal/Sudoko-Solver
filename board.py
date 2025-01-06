@@ -1,6 +1,6 @@
 # Import(s)
 import random
-
+import copy
 
 # check_board function
 def check_board(board):
@@ -46,7 +46,7 @@ def merge(board, solution):
     and returns the merged result
     """
 
-    m_board = board.copy()
+    m_board = copy.deepcopy(board)
     count = 0
 
     for i in range(9):
@@ -70,18 +70,8 @@ def solve_board(board):
     is_complete = False
 
     while is_complete is False:
-        print(board)
         merged_board = merge(board, solution)
-        print(board)
-
-        #
-        if merged_board == board:
-            print(True)
-        else:
-            print(False)
-        print("----")
-        #
-
+        print(merged_board)
         is_valid = check_board(merged_board)
 
         if is_valid is True:
@@ -94,6 +84,7 @@ def solve_board(board):
         else:
             if solution[-1] >= 9:
                 solution.pop()
+                solution[-1] += 1
 
             else:
                 solution[-1] += 1
