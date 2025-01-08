@@ -71,7 +71,6 @@ def solve_board(board):
 
     while is_complete is False:
         merged_board = merge(board, solution)
-        print(merged_board)
         is_valid = check_board(merged_board)
 
         if is_valid is True:
@@ -82,15 +81,14 @@ def solve_board(board):
                 solution.append(1)
 
         else:
-            if solution[-1] >= 9:
+            solution[-1] += 1
+
+            while solution[-1] > 9:
                 solution.pop()
                 solution[-1] += 1
 
-            else:
-                solution[-1] += 1
-
     # Return the solved board
-    return board
+    return merge(board, solution)
 
 
 # Rand block gen function
@@ -161,18 +159,6 @@ def print_board(board):
 def main():
     # Generate a random list
     list = rand_board()
-
-    #     # Set board
-    #     list = [
-    # [6, 2, 5, 8, 4, 3, 7, 9, 1],
-    # [7, 9, 1, 2, 6, 5, 4, 8, 3],
-    # [4, 8, 3, 9, 7, 1, 6, 2, 5],
-    # [8, 1, 4, 5, 9, 7, 2, 3, 6],
-    # [2, 3, 6, 1, 8, 4, 9, 5, 7],
-    # [9, 5, 7, 3, 2, 6, 8, 1, 4],
-    # [5, 6, 9, 4, 3, 2, 1, 7, 8],
-    # [3, 4, 2, 7, 1, 8, 5, 6, 9],
-    # [1, 7, 8, 6, 5, 9, 3, 4, 2]]
 
     # Set str_board
     str_board = [[str(int) for int in row] for row in list]
