@@ -74,7 +74,7 @@ def solve_board(board):
         is_valid = check_board(merged_board)
 
         if is_valid is True:
-            if len(solution) == 54:
+            if len(solution) == 81:
                 is_complete = True
 
             else:
@@ -138,7 +138,7 @@ def rand_board():
         for j in range(9):
             list[i * 3 + j // 3][i * 3 + j % 3] = blocks[i][j]
 
-    # Solve the rest of the board bu calling solve_board function
+    # Solve the rest of the board but calling solve_board function
     list = solve_board(list)
 
     # Return the final list
@@ -157,11 +157,25 @@ def print_board(board):
 
 # Main function
 def main():
-    # Generate a random list
-    list = rand_board()
+    # Hardest backtracking board
+    list = [["-","-","-","-","-","-","-","-","-",],
+            ["-","-","-","-","-",3,"-",8,5,],
+            ["-","-",1,"-",2,"-","-","-","-",],
+            ["-","-","-",5,"-",7,"-","-","-",],
+            ["-","-",4,"-","-","-",1,"-","-",],
+            ["-",9,"-","-","-","-","-","-","-",],
+            [5,"-","-","-","-","-","-",7,3,],
+            ["-","-",2,"-","-",1,"-","-","-",],
+            ["-","-","-","-",4,"-","-","-",9,]]
+
+    # Solve the board
+    list = solve_board(list)
+
+    # # Generate a random list
+    # list = rand_board()
 
     # Set str_board
-    str_board = [[str(int) for int in row] for row in list]
+    list = [[str(int) for int in row] for row in list]
 
     # Check the board
     is_solved = check_board(list)
@@ -169,7 +183,7 @@ def main():
     print(is_solved)
 
     # Print the board
-    print_board(str_board)
+    print_board(list)
 
 
 # Call main function
