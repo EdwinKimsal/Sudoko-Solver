@@ -1,6 +1,7 @@
 # Import(s)
 import random
 import copy
+import time
 
 # check_board function
 def check_board(board):
@@ -74,7 +75,7 @@ def solve_board(board):
         is_valid = check_board(merged_board)
 
         if is_valid is True:
-            if len(solution) == 81:
+            if len(solution) == 54:
                 is_complete = True
 
             else:
@@ -138,7 +139,7 @@ def rand_board():
         for j in range(9):
             list[i * 3 + j // 3][i * 3 + j % 3] = blocks[i][j]
 
-    # Solve the rest of the board but calling solve_board function
+    # Solve the rest of the board bu calling solve_board function
     list = solve_board(list)
 
     # Return the final list
@@ -157,25 +158,12 @@ def print_board(board):
 
 # Main function
 def main():
-    # Hardest backtracking board
-    list = [["-","-","-","-","-","-","-","-","-",],
-            ["-","-","-","-","-",3,"-",8,5,],
-            ["-","-",1,"-",2,"-","-","-","-",],
-            ["-","-","-",5,"-",7,"-","-","-",],
-            ["-","-",4,"-","-","-",1,"-","-",],
-            ["-",9,"-","-","-","-","-","-","-",],
-            [5,"-","-","-","-","-","-",7,3,],
-            ["-","-",2,"-","-",1,"-","-","-",],
-            ["-","-","-","-",4,"-","-","-",9,]]
-
-    # Solve the board
-    list = solve_board(list)
-
-    # # Generate a random list
-    # list = rand_board()
+    start_time = time.time()
+    # Generate a random list
+    list = rand_board()
 
     # Set str_board
-    list = [[str(int) for int in row] for row in list]
+    str_board = [[str(int) for int in row] for row in list]
 
     # Check the board
     is_solved = check_board(list)
@@ -183,8 +171,11 @@ def main():
     print(is_solved)
 
     # Print the board
-    print_board(list)
+    print_board(str_board)
 
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f'Elapsed time: {elapsed_time:.2f} seconds')
 
 # Call main function
 main()
