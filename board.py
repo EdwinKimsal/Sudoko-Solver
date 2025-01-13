@@ -47,16 +47,22 @@ def merge(board, solution):
     and returns the merged result
     """
 
+    # Perform a deep copy of the board
     m_board = copy.deepcopy(board)
+
+    # Set count to 0
     count = 0
 
+    # Iterate through each block in the board
     for i in range(9):
         for j in range(9):
+            # If the block is empty and a valid block, add the solution
             if m_board[i][j] == "-":
                 if count < len(solution):
                     m_board[i][j] = solution[count]
                     count += 1
 
+    # Return the merged board
     return m_board
 
 
@@ -67,13 +73,17 @@ def solve_board(board):
     and returns the solved board
     """
 
-    solution = [1]
-    is_complete = False
+    # Set vars
+    solution = [1] # Start with 1
+    is_complete = False # Initially false
 
+    # Iterate until is_complete is True
     while is_complete is False:
+        # Merge board and check if it is valid
         merged_board = merge(board, solution)
         is_valid = check_board(merged_board)
 
+        # If valid, check if the solution is complete
         if is_valid is True:
             if len(solution) == 54:
                 is_complete = True
@@ -81,6 +91,7 @@ def solve_board(board):
             else:
                 solution.append(1)
 
+        # If not valid, increment as needed
         else:
             solution[-1] += 1
 
@@ -148,6 +159,12 @@ def rand_board():
 
 # Print the board function
 def print_board(board):
+    """
+    Prints the parameter board as a sudoku board,
+    but return nothing
+    """
+
+    # Iterate through each row in the board
     for row in board:
         print("-------------------------------------------------------")
         row = f"|  {"  |  ".join(row)}  |"
@@ -158,7 +175,9 @@ def print_board(board):
 
 # Main function
 def main():
+    # Set start time
     start_time = time.time()
+
     # Generate a random list
     list = rand_board()
 
@@ -173,9 +192,13 @@ def main():
     # Print the board
     print_board(str_board)
 
+    # Set end time
     end_time = time.time()
+
+    # Calculate and print elapsed time
     elapsed_time = end_time - start_time
     print(f'Elapsed time: {elapsed_time:.2f} seconds')
+
 
 # Call main function
 main()
