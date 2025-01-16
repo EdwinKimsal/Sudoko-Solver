@@ -150,7 +150,7 @@ def rand_board():
         for j in range(9):
             list[i * 3 + j // 3][i * 3 + j % 3] = blocks[i][j]
 
-    # Solve the rest of the board bu calling solve_board function
+    # Solve the rest of the board by calling solve_board function
     list = solve_board(list)
 
     # Return the final list
@@ -166,11 +166,28 @@ def print_board(board):
 
     # Iterate through each row in the board
     for row in board:
-        print("-------------------------------------------------------")
-        row = f"|  {"  |  ".join(row)}  |"
+        # Make block vertical boarders
+        if board.index(row) % 3 == 0 and board.index(row) != 0:
+            print("-------------------------------------------------------------")
+
+        # Print each row
+        print("-------------------------------------------------------------")
+        temp_row = []
+        for ele in row:
+            if row.index(ele) % 3 == 0 and row.index(ele) != 0:
+                temp_row.append(f"|  {ele}")
+
+            else:
+                temp_row.append(ele)
+
+        row = f"|  {"  |  ".join(temp_row)}  |"
         print(row)
 
-    print("-------------------------------------------------------")
+    # Print last vertical boarder
+    print("-------------------------------------------------------------")
+
+    # Print extra space
+    print()
 
 
 # Main function
